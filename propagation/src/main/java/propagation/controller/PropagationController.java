@@ -7,24 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import propagation.entity.User;
+import propagation.User;
 import propagation.entity.UserRepository;
 
 @Controller
 @RequestMapping(path = "/demo")
-public class MainController {
+public class PropagationController {
 
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping(path = "/add")
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email) {
+    public @ResponseBody User add(@RequestParam String name, @RequestParam String email) {
 
-        User n = new User();
-        n.setName(name);
-        n.setEmail(email);
-        userRepository.save(n);
-        return "Saved";
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        return userRepository.save(user);
     }
 
     @GetMapping(path = "/all")
