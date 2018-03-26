@@ -39,4 +39,17 @@ public class PropagationController {
     public @ResponseBody Iterable<User> getAllUsers() {
         return propagationService.findAll();
     }
+
+    @GetMapping(path = "/save")
+    public @ResponseBody User save(@BeanParam User user) {
+        User userResult = null;
+        try {
+            userResult = propagationService.saveNew(user);
+            userResult = propagationService.saveNewWithExc(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return userResult;
+    }
 }
