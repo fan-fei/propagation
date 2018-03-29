@@ -9,26 +9,17 @@ import propagation.entity.User;
 import propagation.entity.UserRepository;
 
 @Service
-public class PropagationService {
+public class PropagationService2 {
 
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional(propagation = Propagation.REQUIRED)
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public User save(User user) {
-        return userRepository.save(user);
-    }
-
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public User saveNew(User user) {
-        return userRepository.save(user);
-    }
-
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public User saveNewWithExc(User user) {
-        User userResult = userRepository.save(user);
-        // System.out.println(1 / 0);
-        return userResult;
+        User resultUser = userRepository.save(user);
+        System.out.println(1 / 0);
+        return resultUser;
     }
 
     public void delete(Long id) {
