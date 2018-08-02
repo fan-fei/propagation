@@ -1,2 +1,2 @@
 # propagation
-a example about using spring transaction by @Transactional annotation.
+an example about using spring transaction by @Transactional annotation.
