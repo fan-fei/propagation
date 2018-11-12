@@ -18,24 +18,18 @@ public class PropagationService1 {
     private PropagationService2 propagationService2;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public User save(User user) {
-        User resultUser = userRepository.save(user);
-        user = new User();
-        user.setName("aimee");
-        user.setEmail("aimee@163.com");
+    public Boolean addUser(User userParam) {
+        userRepository.save(userParam);
+
         try {
-            resultUser = propagationService2.save(resultUser);
+            User dbUser = new User();
+            dbUser.setName("aimee");
+            dbUser.setEmail("aimee@163.com");
+            propagationService2.save(dbUser);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return resultUser;
+        return Boolean.TRUE;
     }
 
-    public void delete(Long id) {
-        userRepository.delete(id);
-    }
-
-    public Iterable<User> findAll() {
-        return userRepository.findAll();
-    }
 }

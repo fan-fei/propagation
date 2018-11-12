@@ -14,19 +14,11 @@ public class PropagationService2 {
     @Autowired
     private UserRepository userRepository;
 
-
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public User save(User user) {
-        User resultUser = userRepository.save(user);
+    public Boolean save(User user) {
+        userRepository.save(user);
         System.out.println(1 / 0);
-        return resultUser;
+        return Boolean.TRUE;
     }
 
-    public void delete(Long id) {
-        userRepository.delete(id);
-    }
-
-    public Iterable<User> findAll() {
-        return userRepository.findAll();
-    }
 }
