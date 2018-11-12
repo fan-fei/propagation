@@ -14,7 +14,7 @@ public class PropagationService2 {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Boolean save(User user) {
         userRepository.save(user);
         System.out.println(1 / 0);
