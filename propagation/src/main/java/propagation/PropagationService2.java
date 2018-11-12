@@ -1,4 +1,4 @@
-package propagation.service;
+package propagation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class PropagationService2 {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRED)
     public Boolean save(User user) {
         userRepository.save(user);
         System.out.println(1 / 0);
