@@ -22,17 +22,17 @@ import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-@ServerEndpoint(value = "/propagation/socket/{hallCode}")
+@ServerEndpoint(value = "/propagation/websocket/{hallCode}")
 @Component
 @Data
 @Slf4j
-public class SocketComponent {
+public class WebSocketComponent {
 
     private Session session;
 
     private String hallCode;
 
-    private static Map<String, List<SocketComponent>> sseAllEmitters = Maps.newConcurrentMap();
+    private static Map<String, List<WebSocketComponent>> sseAllEmitters = Maps.newConcurrentMap();
 
     /**
      * 连接建立成功调用的方法
@@ -44,7 +44,7 @@ public class SocketComponent {
 
         synchronized (hallCode) {
             if (Objects.isNull(sseAllEmitters.get(hallCode))) {
-                sseAllEmitters.put(hallCode, new ArrayList<SocketComponent>());
+                sseAllEmitters.put(hallCode, new ArrayList<WebSocketComponent>());
             }
             sseAllEmitters.get(hallCode).add(this);
             try {
@@ -77,8 +77,8 @@ public class SocketComponent {
     public void onMessage(String message) {
         sseAllEmitters.forEach((k, v) -> {
 
-            for (Iterator<SocketComponent> iterator = sseAllEmitters.get(k).iterator(); iterator.hasNext();) {
-                SocketComponent socket = (SocketComponent) iterator.next();
+            for (Iterator<WebSocketComponent> iterator = sseAllEmitters.get(k).iterator(); iterator.hasNext();) {
+                WebSocketComponent socket = (WebSocketComponent) iterator.next();
                 try {
                     log.info("sendText当前站厅连接数：{}", sseAllEmitters.get(hallCode).size());
                     socket.getSession().getBasicRemote().sendText(message);
