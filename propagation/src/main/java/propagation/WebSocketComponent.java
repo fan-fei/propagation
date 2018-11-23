@@ -47,12 +47,6 @@ public class WebSocketComponent {
                 sseAllEmitters.put(hallCode, new ArrayList<WebSocketComponent>());
             }
             sseAllEmitters.get(hallCode).add(this);
-            try {
-                session.getBasicRemote().sendText("[]");
-            } catch (IOException e) {
-                log.info("onOpen当前站厅连接数：{}", sseAllEmitters.get(hallCode).size());
-                log.info(e.getMessage());
-            }
             log.info("onOpen当前站厅连接数：{}", sseAllEmitters.get(hallCode).size());
         }
     }
