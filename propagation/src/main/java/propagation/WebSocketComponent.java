@@ -41,7 +41,7 @@ public class WebSocketComponent {
         this.session = session;
         this.hallCode = hallCode;
 
-        synchronized (hallCode) {
+        synchronized (sseAllEmitters) {
             if (Objects.isNull(sseAllEmitters.get(hallCode))) {
                 sseAllEmitters.put(hallCode, new ArrayList<WebSocketComponent>());
             }
