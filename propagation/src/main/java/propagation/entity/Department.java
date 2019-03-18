@@ -24,6 +24,6 @@ public class Department {
     private String depName;
 
     @OneToMany
-    private List<Employee> employeeList = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
 
 }
