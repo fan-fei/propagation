@@ -1,6 +1,5 @@
 package propagation.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,10 +16,8 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer code;
 
-    @Column(length = 20)
     private String empName;
 
-    @Column(length = 20)
     private String phone;
 
     @ManyToOne
