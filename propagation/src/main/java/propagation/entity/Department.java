@@ -1,15 +1,14 @@
 package propagation.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.google.common.collect.Lists;
 
 import lombok.Data;
 
@@ -21,11 +20,9 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer code;
 
-    @Column(length = 20)
     private String depName;
 
-    @OneToMany
-    @JoinColumn(name = "department_code")
-    private List<Employee> employees = new ArrayList<>();
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employees = Lists.newArrayList();
 
 }
