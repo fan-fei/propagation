@@ -18,8 +18,8 @@ public class MergeSort {
         int[] left = new int[leftLength];
         int[] right = new int[arr.length - leftLength];
         System.arraycopy(arr, 0, left, 0, leftLength);
-        System.arraycopy(arr, leftLength - 1, right, 0, arr.length - leftLength);
-        return merge(divide(left), divide(left));
+        System.arraycopy(arr, leftLength, right, 0, arr.length - leftLength);
+        return merge(divide(left), divide(right));
 
     }
 
@@ -42,9 +42,9 @@ public class MergeSort {
         }
 
         if (leftIndex == left.length) {
-            System.arraycopy(right, rightIndex, merge, mergeIndex, merge.length - 1 - mergeIndex);
+            System.arraycopy(right, rightIndex, merge, mergeIndex, merge.length - mergeIndex);
         } else {
-            System.arraycopy(left, leftIndex, merge, mergeIndex, merge.length - 1 - mergeIndex);
+            System.arraycopy(left, leftIndex, merge, mergeIndex, merge.length - mergeIndex);
         }
 
         return merge;
