@@ -5,11 +5,21 @@ import java.util.Arrays;
 public class MergeSort {
     public static void main(String[] args) {
         int arr[] = new int[] { 10, 9, 4, 7, 3, 3, 5, 6, 1, 0 };
-        sort(arr);
-        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(divide(arr)));
     }
 
-    private static void sort(int arr[]) {
+    private static int[] divide(int arr[]) {
+
+        if (arr.length < 2) {
+            return arr;
+        }
+
+        int leftLength = arr.length / 2;
+        int[] left = new int[leftLength];
+        int[] right = new int[arr.length - leftLength];
+        System.arraycopy(arr, 0, left, 0, leftLength);
+        System.arraycopy(arr, leftLength - 1, right, 0, arr.length - leftLength);
+        return merge(divide(left), divide(left));
 
     }
 
@@ -21,7 +31,7 @@ public class MergeSort {
         int merge[] = new int[left.length + right.length];
 
         while (leftIndex < left.length && rightIndex < right.length) {
-            if (left[leftIndex] < right[rightIndex]) {
+            if (left[leftIndex] <= right[rightIndex]) {
                 merge[mergeIndex] = left[leftIndex];
                 leftIndex++;
             } else {
@@ -31,8 +41,10 @@ public class MergeSort {
             mergeIndex++;
         }
 
-        if (leftIndex == left.length - 1) {
-            System.arraycopy(right, rightIndex, merge, mergeIndex, merge.length - mergeIndex);
+        if (leftIndex == left.length) {
+            System.arraycopy(right, rightIndex, merge, mergeIndex, merge.length - 1 - mergeIndex);
+        } else {
+            System.arraycopy(left, leftIndex, merge, mergeIndex, merge.length - 1 - mergeIndex);
         }
 
         return merge;
