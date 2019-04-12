@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class MergeSort {
     public static void main(String[] args) {
         int arr[] = new int[] { 10, 9, 4, 7, 3, 3, 5, 6, 1, 0 };
-        System.out.println(Arrays.toString(divide(arr)));
+        System.out.println(Arrays.toString(divideAndMerge(arr)));
     }
 
-    private static int[] divide(int arr[]) {
+    private static int[] divideAndMerge(int arr[]) {
 
         if (arr.length < 2) {
             return arr;
@@ -19,7 +19,7 @@ public class MergeSort {
         int[] right = new int[arr.length - leftLength];
         System.arraycopy(arr, 0, left, 0, leftLength);
         System.arraycopy(arr, leftLength, right, 0, arr.length - leftLength);
-        return merge(divide(left), divide(right));
+        return merge(divideAndMerge(left), divideAndMerge(right));
 
     }
 
