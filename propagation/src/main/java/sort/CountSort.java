@@ -23,8 +23,20 @@ public class CountSort {
                 max = i;
             }
         }
-        
-        
+
+        int offset = max - min;
+        int countArr[] = new int[offset + 1];
+
+        for (int i = 0; i < arr.length; i++) {
+            countArr[arr[i] - min] += 1;
+        }
+
+        int k = 0;
+        for (int i = 0; i < countArr.length; i++) {
+            for (int j = 0; j < countArr[i]; j++) {
+                arr[k++] = i + min;
+            }
+        }
 
     }
 
