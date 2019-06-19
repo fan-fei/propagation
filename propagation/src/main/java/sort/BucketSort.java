@@ -20,10 +20,11 @@ public class BucketSort {
             }
         }
 
-        int buckets[][] = new int[arr.length / 4 + 1][0];
+        int bucketCount = (int) Math.sqrt(arr.length);
+        int buckets[][] = new int[bucketCount][0];
 
         for (int i : arr) {
-            int inhanceIndex = (i - min) * 4 / (max - min);
+            int inhanceIndex = (i - min) * bucketCount / (max - min + 1);
             buckets[inhanceIndex] = Arrays.copyOf(buckets[inhanceIndex], buckets[inhanceIndex].length + 1);
             buckets[inhanceIndex][buckets[inhanceIndex].length - 1] = i;
         }
