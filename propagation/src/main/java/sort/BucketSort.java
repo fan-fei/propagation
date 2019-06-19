@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class BucketSort {
     public static void main(String[] args) {
-        int arr[] = new int[] { 10, 9, 4, 7, 3, 3, 5, 6, 1, 0 };
+        int arr[] = new int[] { 10, 9, 4, 7, 3, 3, 5, 6, 1, 0, 56, 56, 7, 8, 8, 234, 23, 44, 4, 4, 7, 67 };
         sort(arr);
         System.out.println(Arrays.toString(arr));
     }
@@ -19,15 +19,25 @@ public class BucketSort {
                 max = i;
             }
         }
-        int distance = max - min;
 
-        int bucket[][] = new int[arr.length / 4 + 1][arr.length];
-        int gap = distance - arr.length / 4;
+        int buckets[][] = new int[arr.length / 4 + 1][0];
 
         for (int i : arr) {
-            int inhanceIndex = i - min / 4 - 1;
+            int inhanceIndex = (i - min) * 4 / (max - min);
+            buckets[inhanceIndex] = Arrays.copyOf(buckets[inhanceIndex], buckets[inhanceIndex].length + 1);
+            buckets[inhanceIndex][buckets[inhanceIndex].length - 1] = i;
         }
 
+        for (int[] bucket : buckets) {
+            shellSort(bucket);
+        }
+
+        int arrIndex = 0;
+        for (int i = 0; i < buckets.length; i++) {
+            for (int j = 0; j < buckets[i].length; j++) {
+                arr[arrIndex++] = buckets[i][j];
+            }
+        }
     }
 
     private static void shellSort(int arr[]) {
